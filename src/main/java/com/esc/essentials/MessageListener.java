@@ -6,8 +6,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-public class MessageListener extends ListenerAdapter
-{
+public class MessageListener extends ListenerAdapter {
     // logger variable to log our process
     private static final Logger LOGGER = LoggerFactory.getLogger(MessageListener.class);
     // command manager class
@@ -33,4 +32,6 @@ public class MessageListener extends ListenerAdapter
             manager.handle(event);
         }
     }
+
+
 }
