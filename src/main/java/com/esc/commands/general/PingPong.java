@@ -31,16 +31,16 @@ public class PingPong implements ICommand {
 
     @Override
     public String getName() {
-        return "pinpon";
+        return "pingpong";
     }
 
     @Override
     public String getHelp() {
-        return "bot responds you as pon pin";
+        return "bot responds you as pong ping";
     }
 
     @Override
     public List<String> getAliases() {
-        return List.of("pin,pon,pinpon");
+        return List.of("ping,pong,pingpong");
     }
 }
