@@ -2,6 +2,7 @@ package com.esc.essentials;
 
 import com.esc.commands.CommandContext;
 import com.esc.commands.abstracts.ICommand;
+import com.esc.commands.general.Clear;
 import com.esc.commands.general.Help;
 import com.esc.commands.general.PingPong;
 import net.dv8tion.jda.api.events.message.MessageReceivedEvent;
@@ -16,6 +17,7 @@ public class CommandManager {
     public CommandManager() {
         addCommand(new Help(this));
         addCommand(new PingPong());
+        addCommand(new Clear());
     }
 
     private void addCommand(ICommand command) {
