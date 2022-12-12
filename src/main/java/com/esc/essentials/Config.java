@@ -13,6 +13,7 @@ import net.dv8tion.jda.api.utils.cache.CacheFlag;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.nio.file.Paths;
 
 public class Config {
 
