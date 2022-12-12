@@ -18,12 +18,46 @@ import java.nio.file.Paths;
 public class Config {
 
     // variable that used to get dotenv file
-    private static final Dotenv dotenv = Dotenv.configure()
+    private static Dotenv dotenv = Dotenv.configure()
             .ignoreIfMissing()
             .load();
 
     public static String getVariable(String key) {
         return dotenv.get(key.toUpperCase());
+    }
+
+    public static void updateDotEnv(String newToken, String newPrefix) {
+        File envFile = new File(".env");
+        // environment content which will be used to write .env file
+        String envContent = "";
+
+        if (envFile.exists()) {
+            // get current token and prefix variables
+            String token = getVariable("token");
+            String prefix = getVariable("prefix");
+
+            // if given new token/prefix is blank then do not change token
+            // else is not blank then change token variable
+            token = newToken.isBlank() ? token : newToken;
+            prefix = newPrefix.isBlank() ? prefix : newPrefix;
+
+            // change environment content
+            envContent = "TOKEN=" + token
+                    + "\nPRE=" + prefix;
+        }
+        // if there is not environment file in present
+        else {
+            // change environment content
+            envContent = "TOKEN=" + newToken
+                    + "\nPRE=" + (newPrefix.isBlank() ? "." : newPrefix);
+        }
+
+        // write .env file
+        try (FileWriter writer = new FileWriter(".env")) {
+            writer.write(envContent);
+        } catch (IOException exception) {
+            System.out.println("An error occurred during creating the .env");
+        }
     }
 
     public static void configureDotEnv() {
@@ -36,6 +70,8 @@ public class Config {
                 System.out.println("An error occurred during creating the .env");
             }
         }
+        // load dotEnv one more time
+        dotenv = Dotenv.configure().ignoreIfMissing().load();
     }
 
     public static void configureBot() {
